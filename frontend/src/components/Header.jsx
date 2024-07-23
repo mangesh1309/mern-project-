@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -22,7 +22,7 @@ export default function Header() {
             <ul className='flex gap-4'>
                 <Link to={"/"}> <li className='hidden sm:inline text-slate-700 hover:cursor-pointer hover:font-bold'>Home</li> </Link>
                 <Link to={"/about"}> <li className='hidden sm:inline text-slate-700 hover:cursor-pointer hover:font-bold'>About</li> </Link>
-                <Link to={"/signin"}> <li className='hidden sm:inline text-slate-700 hover:cursor-pointer hover:font-bold'>SignIn</li> </Link>
+                <Link to={"/signup"}> <li className='hidden sm:inline text-slate-700 hover:cursor-pointer hover:font-bold'>SignUp</li> </Link>
 
             </ul>
         </div>
