@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -17,8 +20,9 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
+    // setLoading(true);
+    // setError(null);
+    dispatch(signInStart());
 
     try {
       const res = await fetch('/backend/auth/signin', {
@@ -31,17 +35,20 @@ export default function SignIn() {
 
       if (!res.ok) {
         const errorData = await res.json();
-        setLoading(false);
-        setError(errorData.message || 'An error occurred');
+        // setLoading(false);
+        // setError(errorData.message || 'An error occurred');
+        dispatch(signInFailure(errorData.message));
         return;
       }
 
       const data = await res.json();
-      setLoading(false);
+      // setLoading(false);
+      dispatch(signInSuccess(data.message));
       navigate('/');
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      // setLoading(false);
+      // setError(error.message);
+      dispatch(signInFailure(error.message));
     }
   };
 
