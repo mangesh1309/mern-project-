@@ -8,7 +8,7 @@ dotenv.config();
 // Convert SALT_ROUNDS to an integer
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS, 10);
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
 
     try {
@@ -20,7 +20,6 @@ export const signup = async (req, res) => {
 
         res.status(201).json("USER CREATED SUCCESSFULLY");
     } catch (error) {
-        console.error('Error during user signup:', error);
-        res.status(500).json("An error occurred during signup");
+        next(error);
     }
 };
