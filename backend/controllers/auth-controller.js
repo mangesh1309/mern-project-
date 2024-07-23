@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken'
 // Load environment variables from .env file
+import { errorHandler } from "../utils/error.js";
 dotenv.config();
 
 // Convert SALT_ROUNDS to an integer
